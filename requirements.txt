@@ -1,0 +1,4 @@
+Flask
+cs50
+email-validator
+Flask-WTF

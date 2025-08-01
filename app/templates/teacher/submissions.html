@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block title %}Exam Submissions{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Student Submissions</h2>
+{% if submissions %}
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Student</th>
+            <th>Timestamp</th>
+            <th>MCQ Score</th>
+            <th>Subjective Score</th>
+            <th>Total Score</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sub in submissions %}
+        <tr>
+            <td>{{ sub.username }}</td>
+            <td>{{ sub.timestamp }}</td>
+            <td>{{ sub.mcq_score }}</td>
+            <td>{{ sub.subjective_score }}</td>
+            <td>{{ sub.total_score }}</td>
+            <td>
+                <a href="{{ url_for('teacher.evaluate_submission', sub_id=sub.id) }}" class="btn btn-sm btn-warning">⚙️ AI Evaluate</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <div class="alert alert-info">No submissions yet for this exam.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block title %}Exam Results{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Results Overview</h2>
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Exam Title</th>
+            <th>Student</th>
+            <th>Total Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in results %}
+        <tr>
+            <td>{{ r.title }}</td>
+            <td>{{ r.username }}</td>
+            <td>{{ r.total_score }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

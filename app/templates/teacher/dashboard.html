@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Welcome to Your Dashboard</h2>
+<a href="{{ url_for('teacher.create_exam') }}" class="btn btn-success mb-3">➕ Create New Exam</a>
+<a href="{{ url_for('teacher.manage_exams') }}" class="btn btn-primary mb-3 ms-2">📋 Manage Exams</a>
+<a href="{{ url_for('teacher.view_results') }}" class="btn btn-info mb-3 ms-2">📊 View Results</a>
+
+<hr>
+<h4>Your Exams</h4>
+{% if exams %}
+<ul class="list-group">
+    {% for exam in exams %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>{{ exam.title }}</strong>
+            <span class="text-muted">Created: {{ exam.created_at[:19] }}</span>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <div class="alert alert-info">You haven’t created any exams yet.</div>
+{% endif %}
+{% endblock %}

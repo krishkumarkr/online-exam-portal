@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title %}Add Question{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Add Question to Exam {{ exam_id }}</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+        {{ form.question_text.label(class="form-label") }}
+        {{ form.question_text(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.is_mcq.label(class="form-label") }}
+        {{ form.is_mcq(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.correct_answer.label(class="form-label") }}
+        {{ form.correct_answer(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.marks.label(class="form-label") }}
+        {{ form.marks(class="form-control") }}
+    </div>
+
+    <div id="mcq-options" class="border p-3 rounded mb-3">
+        <h5>MCQ Options (used only if selected)</h5>
+        <div>{{ form.option_a.label }} {{ form.option_a(class="form-control") }}</div>
+        <div>{{ form.option_b.label }} {{ form.option_b(class="form-control") }}</div>
+        <div>{{ form.option_c.label }} {{ form.option_c(class="form-control") }}</div>
+        <div>{{ form.option_d.label }} {{ form.option_d(class="form-control") }}</div>
+    </div>
+
+    {{ form.submit(class="btn btn-success") }}
+</form>
+
+<script>
+    const isMcqField = document.querySelector('[name="is_mcq"]');
+    const optionsDiv = document.getElementById("mcq-options");
+    function toggleOptions() {
+        optionsDiv.style.display = isMcqField.value === "1" ? "block" : "none";
+    }
+    isMcqField.addEventListener("change", toggleOptions);
+    toggleOptions();  // call initially
+</script>
+{% endblock %}
